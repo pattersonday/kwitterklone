@@ -8,6 +8,14 @@ from .forms import AddTweetForm
 import datetime
 
 
+def index(request):
+    html = 'index.html'
+
+    all_tweets = Tweet.objects.all()
+
+    return render(request, html, {'all_tweets': all_tweets})
+
+
 def tweet_view(request, id):
     html = 'tweets.html'
 

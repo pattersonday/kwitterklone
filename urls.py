@@ -23,3 +23,8 @@ from twitterclone.twitterusers.urls import urlpatterns as twitterusers_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+urlpatterns += authentication_urls
+urlpatterns += notification_urls
+urlpatterns += tweet_urls
+urlpatterns += twitterusers_urls
