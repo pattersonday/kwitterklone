@@ -28,10 +28,10 @@ def tweet_form_view(request):
     html = 'genericform.html'
 
     if request.method == 'POST':
-        form = AddTweetForm(request.POST)
+        tweet_form = AddTweetForm(request.POST)
 
-        if form.is_valid():
-            data = form.cleaned_data
+        if tweet_form.is_valid():
+            data = tweet_form.cleaned_data
             Tweet.objects.create(
                 twitter_user=data['twitter_user'],
                 posts=data['posts'],
