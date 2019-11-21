@@ -10,6 +10,3 @@ class AddTweetForm(forms.ModelForm):
             'posts',
             'post_date'
         ]
-
-
-form = AddTweetForm()

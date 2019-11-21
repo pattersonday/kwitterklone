@@ -1,0 +1,12 @@
+<ul>
+    {% for data in users %}
+    <li>{{ data.user }}</li>
+    {% endfor %}
+    {% for data in users_tweets %}
+    <li>{{ data.posts}}</li>
+    <li>{{ data.post_date }}</li>
+    {% endfor %}
+    {% for data in users %}
+    <li>{{ data.follower }}</li>
+    {% endfor %}
+</ul>

@@ -5,8 +5,6 @@ from django.utils import timezone
 from .models import Tweet
 from .forms import AddTweetForm
 
-import datetime
-
 
 def index(request):
     html = 'index.html'
@@ -35,10 +33,10 @@ def tweet_form_view(request):
             Tweet.objects.create(
                 twitter_user=data['twitter_user'],
                 posts=data['posts'],
-                post_date=datetime.datetime.now(tz=timezone.utc)
+                post_date=timezone.now()
             )
             return HttpResponseRedirect(reverse('homepage'))
 
     tweet_form = AddTweetForm()
 
-    return render(request, html, {'tweet_form': tweet_form})
+    return render(request, html, {'form': tweet_form})

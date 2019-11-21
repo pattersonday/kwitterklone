@@ -1,0 +1,11 @@
+<a href='/tweetform/'>Make a post</a>
+
+<ul style='list-style:none'>
+    {% for data in all_tweets %}
+        <li>
+            <a href='/user/{{ data.twitter_user.id }}/'>{{ data.twitter_user }}</a>
+        </li>
+        <li>{{data.posts}}</li>
+        <li>{{data.post_date}}</li>
+    {% endfor %}
+</ul>

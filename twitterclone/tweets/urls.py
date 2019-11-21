@@ -21,5 +21,5 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='homepage'),
-    path('tweet/<int:id>/', views.tweet_view),
-    path('tweetform/', views.tweet_form_view, name='tweetform')
+    path('tweet/<int:id>/', views.tweet_view, name='tweet'),
+    path('tweetform/', views.tweet_form_view, name='tweetform')]
