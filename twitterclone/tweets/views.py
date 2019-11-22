@@ -16,7 +16,8 @@ def index(request):
 
     all_tweets = Tweet.objects.all()
 
-    notify_count = Notification.objects.filter(notify=request.user.twitteruser).count()
+    notify_count = Notification.objects.filter(
+        notify=request.user.twitteruser).count()
 
     return render(request, html,
                   {'all_tweets': all_tweets, 'notify_count': notify_count})

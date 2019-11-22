@@ -6,10 +6,10 @@
 <ul style='list-style:none'>
     {% for data in users %}
     <li>{{ data.user }}</li>
+    <button><a href='/logout/'></a>Follow</button>Followers: {{ follower_count }}</<button>
     {% endfor %}
     {% for data in users_tweets %}
     <li>{{ data.posts}}</li>
     <li>{{ data.post_date }}</li>
     {% endfor %}
-    <li>{{ follower_count }}</li>
 </ul>
