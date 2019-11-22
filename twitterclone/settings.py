@@ -62,6 +62,12 @@ TEMPLATES = [
             ),
             os.path.join(
                 BASE_DIR, 'twitterclone', 'tweets', 'templates'
+            ),
+            os.path.join(
+                BASE_DIR, 'twitterclone', 'notifications', 'templates'
+            ),
+            os.path.join(
+                BASE_DIR, 'twitterclone', 'authentication', 'templates'
             )
         ],
         'APP_DIRS': True,
