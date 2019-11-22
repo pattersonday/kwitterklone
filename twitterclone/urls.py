@@ -22,9 +22,11 @@ from twitterclone.twitterusers.urls import urlpatterns as twitterusers_urls
 
 from twitterclone.tweets.models import Tweet
 from twitterclone.twitterusers.models import TwitterUser
+from twitterclone.notifications.models import Notification
 
 admin.site.register(Tweet)
 admin.site.register(TwitterUser)
+admin.site.register(Notification)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

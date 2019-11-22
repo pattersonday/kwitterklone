@@ -4,6 +4,10 @@ from django.utils import timezone
 
 from .models import Tweet
 from .forms import AddTweetForm
+from twitterclone.twitterusers.models import TwitterUser
+from twitterclone.notifications.models import Notification
+
+import re
 
 
 def index(request):
@@ -30,11 +34,23 @@ def tweet_form_view(request):
 
         if tweet_form.is_valid():
             data = tweet_form.cleaned_data
-            Tweet.objects.create(
+            created_tweet = Tweet.objects.create(
                 twitter_user=data['twitter_user'],
                 posts=data['posts'],
                 post_date=timezone.now()
             )
+        
+            if '@' in data['posts']:
+                tags = re.findall(r'@(\w+)', data['posts'])
+                for tag in tags:
+                    target_user = TwitterUser.objects.get(
+                        user__username=tag
+                    )
+                    Notification.objects.create(
+                        notify=target_user,
+                        tweet_notification=created_tweet
+                    )
+
             return HttpResponseRedirect(reverse('homepage'))
 
     tweet_form = AddTweetForm()
