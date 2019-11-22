@@ -14,8 +14,10 @@ def user_view(request, id):
 
     users_tweets = Tweet.objects.filter(twitter_user=id)
 
+    follower_count = users.first().follower.count()
+
     return render(request, html,
-                  {'users': users, 'users_tweets': users_tweets})
+                  {'users': users, 'users_tweets': users_tweets, 'follower_count': follower_count})
 
 
 def user_form_view(request):
@@ -47,7 +49,7 @@ def follower_view(request, id):
 
     request.user.twitteruser.follower.add(follower)
 
-    return HttpResponseRedirect(reverse('user'))
+    return HttpResponseRedirect(reverse('user', args=(id,)))
 
 
 def unfollow_view(request, id):
@@ -56,4 +58,4 @@ def unfollow_view(request, id):
 
     request.user.twitteruser.follower.remove(unfollow)
 
-    return HttpResponseRedirect(reverse('user'))
+    return HttpResponseRedirect(reverse('user', args=(id,)))

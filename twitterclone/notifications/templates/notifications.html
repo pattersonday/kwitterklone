@@ -1,0 +1,9 @@
+<a href='/'>Homepage</a>
+
+<ul style='list-style:none'>
+    {% for data in all_notifications %}
+        <li>{{ data.notify }}</li>
+        <li>{{ data.seen_notification }}</li>
+        <li>{{ data.tweet_notification }}</li>
+    {% endfor %}
+</ul>

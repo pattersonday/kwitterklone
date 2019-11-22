@@ -10,12 +10,16 @@ from twitterclone.notifications.models import Notification
 import re
 
 
+@login_required
 def index(request):
     html = 'index.html'
 
     all_tweets = Tweet.objects.all()
 
-    return render(request, html, {'all_tweets': all_tweets})
+    notify_count = Notification.objects.filter(notify=request.user.twitteruser).count()
+
+    return render(request, html,
+                  {'all_tweets': all_tweets, 'notify_count': notify_count})
 
 
 def tweet_view(request, id):
@@ -39,7 +43,7 @@ def tweet_form_view(request):
                 posts=data['posts'],
                 post_date=timezone.now()
             )
-        
+
             if '@' in data['posts']:
                 tags = re.findall(r'@(\w+)', data['posts'])
                 for tag in tags:
