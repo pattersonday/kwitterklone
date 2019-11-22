@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 from twitterclone.tweets.models import Tweet
 from .models import TwitterUser
-from .forms import AddTwitterForm
+from .forms import AddTwitterUserForm
 
 
 def user_view(request, id):
