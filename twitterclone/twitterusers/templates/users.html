@@ -7,7 +7,7 @@
     {% for data in users %}
     <li>{{ data.user }}</li>
     <li>
-        <button><a href='/following/{{ data.id }}/'>Follow</a></button>Followers: {{ follower_count }}
+        <button><a href='/following/{{ data.id }}/'>Follow</a></button>Following: {{ following_count }}
     </li>
     <li>
         <button><a href='/unfollowing/{{ data.id }}/'>Unfollow</a></button>
