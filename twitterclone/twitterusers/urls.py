@@ -21,5 +21,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/<int:id>/', views.user_view, name='user'),
-    path('userform/', views.user_form_view, name='userform')
+    path('userform/', views.user_form_view, name='userform'),
+    path('following/<int:id>/', views.follower_view, name='following'),
+    path('unfollowing/<int:id>/', views.unfollow_view, name='unfollowing')
 ]

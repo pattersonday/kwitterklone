@@ -6,7 +6,12 @@
 <ul style='list-style:none'>
     {% for data in users %}
     <li>{{ data.user }}</li>
-    <button><a href='/logout/'></a>Follow</button>Followers: {{ follower_count }}</<button>
+    <li>
+        <button><a href='/following/{{ data.id }}/'>Follow</a></button>Followers: {{ follower_count }}
+    </li>
+    <li>
+        <button><a href='/unfollowing/{{ data.id }}/'>Unfollow</a></button>
+    </li>
     {% endfor %}
     {% for data in users_tweets %}
     <li>{{ data.posts}}</li>

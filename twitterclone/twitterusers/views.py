@@ -24,7 +24,7 @@ def user_form_view(request):
     html = 'genericform.html'
 
     if request.method == 'POST':
-        twitter_user_form = AddTwitterForm(request.POST)
+        twitter_user_form = AddTwitterUserForm(request.POST)
 
         if twitter_user_form.is_valid():
             data = twitter_user_form.cleaned_data
@@ -38,7 +38,7 @@ def user_form_view(request):
             )
             return HttpResponseRedirect(reverse('homepage'))
 
-    twitter_user_form = AddTwitterForm()
+    twitter_user_form = AddTwitterUserForm()
 
     return render(request, html, {'form': twitter_user_form})
 
