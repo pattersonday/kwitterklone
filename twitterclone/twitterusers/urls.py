@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from . import views
+from twitterclone.twitterusers import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/<int:id>/', views.user_view, name='user'),
+    path('user/<int:id>/', views.UserView.as_view(), name='user'),
     path('userform/', views.user_form_view, name='userform'),
     path('following/<int:id>/', views.following_view, name='following'),
     path('unfollowing/<int:id>/', views.unfollow_view, name='unfollowing')

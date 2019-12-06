@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from . import views
+from twitterclone.tweets import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='homepage'),
+    path('', views.Index.as_view(), name='homepage'),
     path('tweet/<int:id>/', views.tweet_view, name='tweet'),
-    path('tweetform/', views.tweet_form_view, name='tweetform')]
+    path('tweetform/', views.TweetFormView.as_view(), name='tweetform')]
