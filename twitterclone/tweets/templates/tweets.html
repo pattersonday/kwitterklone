@@ -1,0 +1,13 @@
+<a href='/'>Home Page</a>
+<a href='/registeruserform/'>Make an Account</a>
+<a href='/tweetform/'>Make a post</a>
+<a href='/logout/'>Logout</a>
+
+
+<ul style='list-style:none'>
+    {% for data in tweet %}
+        <li>{{ data.twitter_user }}</li>
+        <li>{{ data.posts }}</li>
+        <li>{{ data.post_date }}</li>
+    {% endfor %}
+</ul>

@@ -10,7 +10,9 @@
         <li>
             <a href='/user/{{ data.twitter_user.id }}/'>{{ data.twitter_user }}</a>
         </li>
-        <li>{{data.posts}}</li>
+        <li>
+            <a href='/tweet/{{ data.id }}/'>{{ data.posts }}</a>
+        </li>
         <li>{{data.post_date}}</li>
     {% endfor %}
 </ul>
