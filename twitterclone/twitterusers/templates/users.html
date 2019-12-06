@@ -6,6 +6,7 @@
 <ul style='list-style:none'>
     {% for data in users %}
     <li>{{ data.user }}</li>
+    <li>Tweet Count: {{ tweet_count }}</li>
     <li>
         <button><a href='/following/{{ data.id }}/'>Follow</a></button>Following: {{ following_count }}
     </li>

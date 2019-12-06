@@ -16,8 +16,12 @@ def user_view(request, id):
 
     following_count = users.first().following.count()
 
+    tweet_count = users_tweets.count()
+
     return render(request, html,
-                  {'users': users, 'users_tweets': users_tweets, 'following_count': following_count})
+                  {'users': users, 'users_tweets': users_tweets,
+                   'following_count': following_count,
+                   'tweet_count': tweet_count})
 
 
 def user_form_view(request):
