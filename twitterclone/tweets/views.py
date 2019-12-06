@@ -1,6 +1,8 @@
 from django.shortcuts import HttpResponseRedirect, render, reverse
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
+from django.views import View
+from django.utils.decorators import method_decorator
 
 from .models import Tweet
 from .forms import AddTweetForm
@@ -10,17 +12,18 @@ from twitterclone.notifications.models import Notification
 import re
 
 
-@login_required
-def index(request):
-    html = 'index.html'
+class Index(View):
+    @method_decorator(login_required, name='index')
+    def get(self, request):
+        html = 'index.html'
 
-    all_tweets = Tweet.objects.all()
+        all_tweets = Tweet.objects.all()
 
-    notify_count = Notification.objects.filter(
-        notify=request.user.twitteruser).count()
+        notify_count = Notification.objects.filter(
+            notify=request.user.twitteruser).count()
 
-    return render(request, html,
-                  {'all_tweets': all_tweets, 'notify_count': notify_count})
+        return render(request, html,
+                      {'all_tweets': all_tweets, 'notify_count': notify_count})
 
 
 def tweet_view(request, id):
@@ -31,14 +34,20 @@ def tweet_view(request, id):
     return render(request, html, {'tweet': tweet})
 
 
-def tweet_form_view(request):
-    html = 'genericform.html'
+class TweetFormView(View):
+    form_class = AddTweetForm
+    initial = {'key': 'value'}
+    template_name = 'genericform.html'
 
-    if request.method == 'POST':
-        tweet_form = AddTweetForm(request.POST)
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
 
-        if tweet_form.is_valid():
-            data = tweet_form.cleaned_data
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
             created_tweet = Tweet.objects.create(
                 twitter_user=data['twitter_user'],
                 posts=data['posts'],
@@ -58,6 +67,4 @@ def tweet_form_view(request):
 
             return HttpResponseRedirect(reverse('homepage'))
 
-    tweet_form = AddTweetForm()
-
-    return render(request, html, {'form': tweet_form})
+        return render(request, self.template_name, {'form': form})

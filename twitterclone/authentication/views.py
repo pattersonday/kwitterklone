@@ -1,35 +1,37 @@
 from django.shortcuts import HttpResponseRedirect, render, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.views import View
 
 from .forms import LoginForm
 from twitterclone.twitterusers.forms import AddTwitterUserForm
 from twitterclone.twitterusers.models import TwitterUser
 
 
-def login_view(request):
-    html = 'login.html'
+class LoginView(View):
+    def get(self, request):
+        html = 'login.html'
 
-    if request.method == 'POST':
-        login_form = LoginForm(request.POST)
+        if request.method == 'POST':
+            login_form = LoginForm(request.POST)
 
-        if login_form.is_valid():
-            data = login_form.cleaned_data
-            user = authenticate(
-                username=data['username'],
-                password=data['password']
-            )
-        if user:
-            login(request, user)
-            return HttpResponseRedirect(
-                request.GET.get(
-                    'next', reverse('homepage')
-                    )
-            )
+            if login_form.is_valid():
+                data = login_form.cleaned_data
+                user = authenticate(
+                    username=data['username'],
+                    password=data['password']
+                )
+            if user:
+                login(request, user)
+                return HttpResponseRedirect(
+                    request.GET.get(
+                        'next', reverse('homepage')
+                        )
+                )
 
-    login_form = LoginForm()
+        login_form = LoginForm()
 
-    return render(request, html, {'login_form': login_form})
+        return render(request, html, {'login_form': login_form})
 
 
 def logout_view(request):

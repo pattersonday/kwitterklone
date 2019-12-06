@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from . import views
+from twitterclone.authentication import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +24,6 @@ urlpatterns = [
         'registeruserform/', views.register_user_form,
         name='registeruserform'
         ),
-    path('login/', views.login_view, name='login'),
+    path('login/', views.LoginView.as_view(), name='login'),
     path('logout/', views.logout_view, name='logout')
 ]

@@ -1,23 +1,26 @@
 from django.shortcuts import HttpResponseRedirect, render, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views import View
 
 from twitterclone.tweets.models import Tweet
 from .models import TwitterUser
 from .forms import AddTwitterUserForm
 
 
-def user_view(request, id):
-    html = 'users.html'
+class UserView(View):
+    def get(self, request, id):
+        html = 'users.html'
 
-    users = TwitterUser.objects.filter(id=id)
+        users = TwitterUser.objects.filter(id=id)
 
-    users_tweets = Tweet.objects.filter(twitter_user=id)
+        users_tweets = Tweet.objects.filter(twitter_user=id)
 
-    following_count = users.first().following.count()
+        following_count = users.first().following.count()
 
-    return render(request, html,
-                  {'users': users, 'users_tweets': users_tweets, 'following_count': following_count})
+        return render(request, html,
+                      {'users': users, 'users_tweets': users_tweets,
+                       'following_count': following_count})
 
 
 def user_form_view(request):
